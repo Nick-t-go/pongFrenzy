@@ -1,5 +1,5 @@
 import 'phaser';
-import { ScreenConfig } from './util/screenConfig';
+import { ScreenConfig } from './classes/util/screenConfig';
 
 import { SimpleScene } from './scenes/simple-scene';
 

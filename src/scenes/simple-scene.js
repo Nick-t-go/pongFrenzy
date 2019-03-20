@@ -1,13 +1,17 @@
 import {
   ScreenConfig,
-} from '../util/screenConfig';
+} from '../classes/util/screenConfig';
 import {
   AlignGrid,
-} from '../util/alignGrid';
+} from '../classes/util/alignGrid';
+import {
+  FlatButton,
+} from '../classes/ui/flatButton';
 
 class SimpleScene extends Phaser.Scene {
   preload() {
     this.load.image('cokecan', 'assets/cokecan.png');
+    this.load.image('button1', 'assets/ui/buttons/1/1.png');
   }
 
   create() {
@@ -29,6 +33,12 @@ class SimpleScene extends Phaser.Scene {
     );
     alignGrid.showNumbers();
     alignGrid.placeAtIndex(16, cokeCan);
+    let flatButton = new FlatButton({
+      scene: this,
+      key: 'button1',
+      text:"Press Me",
+    });
+    alignGrid.placeAtIndex(0, flatButton);
   }
 }
 

@@ -79,10 +79,10 @@ class SimpleScene extends Phaser.Scene {
         console.log('Self Destruct!');
         break;
       case 'fire_lasers':
-        console.log('Fire Lasers!');
+        this.scene.start('SceneOver');
         break;
       default:
-        console.log('button pushed')
+        console.log('button pushed');
         break;
     }
   }

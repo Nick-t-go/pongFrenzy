@@ -8,7 +8,11 @@ class FlatButton extends Phaser.GameObjects.Container {
     event,
     emitter,
     params = 'Boop',
-    textConfig = { color: 'white', fontSize: 20 },
+    textConfig = {
+      color: 'white',
+      fontSize: 20
+    },
+    isMobile = false,
   }) {
 
     if (!scene || !key) {
@@ -37,9 +41,23 @@ class FlatButton extends Phaser.GameObjects.Container {
       this.params = params;
     }
 
+    if (!isMobile) {
+      this.back.on('pointerover', this.hover, this);
+      this.back.on('pointerout', this.out, this);
+    }
+
 
     this.scene.add.existing(this);
   }
+
+  hover() {
+    this.y -= 5;
+  }
+
+  out() {
+    this.y += 5;
+  }
+
 
   pressed() {
     this.emitter.emit(this.event, this.params);

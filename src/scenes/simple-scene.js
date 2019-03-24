@@ -12,16 +12,39 @@ import {
   Controller,
 } from '../classes/mc/controller';
 
+import {
+  MediaManager,
+} from '../classes/util/mediaManager';
+
+import {
+  Constants,
+} from '../constants';
+
+import {
+  Model, 
+} from '../classes/mc/model';
+
+import {
+  ToggleButton
+} from '../classes/ui/toggleButton';
+
 class SimpleScene extends Phaser.Scene {
 
-  constructor(){
-    super('SceneMain')
+  constructor() {
+    super('SceneMain');
   }
 
   preload() {
     this.load.image('cokecan', 'assets/cokecan.png');
     this.load.image('button1', 'assets/ui/buttons/2/1.png');
     this.load.image('button2', 'assets/ui/buttons/2/5.png');
+    this.load.audio('cat', ['assets/audio/meow.mp3', 'assets/audio/meow.ogg']);
+    this.load.audio('backgroundMusic', ['assets/audio/background.mp3', 'assets/audio/background.ogg']);
+    this.load.image('toggleBack', 'assets/ui/toggles/1.png');
+    this.load.image('sfxOff', 'assets/ui/icons/sfx_off.png');
+    this.load.image('sfxOn', 'assets/ui/icons/sfx_on.png');
+    this.load.image('musicOn', 'assets/ui/icons/music_on.png');
+    this.load.image('musicOff', 'assets/ui/icons/music_off.png');
   }
 
   create() {
@@ -36,9 +59,20 @@ class SimpleScene extends Phaser.Scene {
     };
 
     this.emitter = new Phaser.Events.EventEmitter();
-    this.controller = new Controller(this.emitter, this.gameConstants, this.model);
+    this.G = new Constants();
+    this.model = new Model(this.emitter, this.G);
+    this.controller = new Controller(this.emitter, this.G, this.model);
 
-    const fireText = { color: 'red', fontSize: 20 };
+    this.mediaManager = new MediaManager({
+      scene: this,
+      model: this.model,
+    });
+    this.mediaManager.setBackgroundMusic('backgroundMusic');
+
+    const fireText = {
+      color: 'red',
+      fontSize: 20,
+    };
 
     const alignGrid = new AlignGrid(
       gridConfig, {
@@ -65,28 +99,52 @@ class SimpleScene extends Phaser.Scene {
       emitter: this.emitter,
       params: 'self_destruct',
     });
+    const sfxToggle = new ToggleButton({
+      x: 240,
+      y: 450,
+      scene: this,
+      backKey: 'toggleBack',
+      onIcon: 'sfxOn',
+      offIcon: 'sfxOff',
+      value: true,
+      width: ScreenConfig.width(),
+      event: this.G.TOGGLE_SOUND,
+      emitter: this.emitter,
+    });
+    const musicToggle = new ToggleButton({
+      x: 240,
+      y: 650,
+      scene: this,
+      backKey: 'toggleBack',
+      onIcon: 'musicOn',
+      offIcon: 'musicOff',
+      value: true,
+      width: ScreenConfig.width(),
+      event: this.G.TOGGLE_MUSIC,
+      emitter: this.emitter,
+    });
+    alignGrid.placeAtIndex(7, flatButton);
+    alignGrid.placeAtIndex(12, flatButton2);
+    alignGrid.placeAtIndex(17, sfxToggle);
+    alignGrid.placeAtIndex(22, musicToggle);
+
+
     this.emitter.on('button_pressed', this.buttonPressed, this);
-    alignGrid.placeAtIndex(0, flatButton);
-    alignGrid.placeAtIndex(6, flatButton2);
-
   }
-
-
 
   buttonPressed(params) {
     switch (params) {
       case 'self_destruct':
-        console.log('Self Destruct!');
+        this.model.musicOn = !this.model.musicOn;
         break;
       case 'fire_lasers':
         this.scene.start('SceneOver');
         break;
       default:
-        console.log('button pushed');
+        this.emitter.emit(this.G.PLAY_SOUND, 'cat');
         break;
     }
   }
-
 }
 
 export {

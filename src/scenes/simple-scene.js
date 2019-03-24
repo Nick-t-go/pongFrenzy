@@ -21,12 +21,12 @@ import {
 } from '../constants';
 
 import {
-  Model, 
+  Model,
 } from '../classes/mc/model';
 
 import {
-  ToggleButton
-} from '../classes/ui/toggleButton';
+  SoundButtons,
+} from '../classes/ui/soundButtons';
 
 class SimpleScene extends Phaser.Scene {
 
@@ -99,35 +99,12 @@ class SimpleScene extends Phaser.Scene {
       emitter: this.emitter,
       params: 'self_destruct',
     });
-    const sfxToggle = new ToggleButton({
-      x: 240,
-      y: 450,
-      scene: this,
-      backKey: 'toggleBack',
-      onIcon: 'sfxOn',
-      offIcon: 'sfxOff',
-      value: true,
-      width: ScreenConfig.width(),
-      event: this.G.TOGGLE_SOUND,
-      emitter: this.emitter,
-    });
-    const musicToggle = new ToggleButton({
-      x: 240,
-      y: 650,
-      scene: this,
-      backKey: 'toggleBack',
-      onIcon: 'musicOn',
-      offIcon: 'musicOff',
-      value: true,
-      width: ScreenConfig.width(),
-      event: this.G.TOGGLE_MUSIC,
-      emitter: this.emitter,
-    });
+    this.sb = new SoundButtons(this, ScreenConfig.width());
+
+    alignGrid.placeAtIndex(0, this.sb.musicToggle);
+    alignGrid.placeAtIndex(4, this.sb.sfxToggle);   
     alignGrid.placeAtIndex(7, flatButton);
     alignGrid.placeAtIndex(12, flatButton2);
-    alignGrid.placeAtIndex(17, sfxToggle);
-    alignGrid.placeAtIndex(22, musicToggle);
-
 
     this.emitter.on('button_pressed', this.buttonPressed, this);
   }

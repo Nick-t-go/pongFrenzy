@@ -56,6 +56,7 @@ class ToggleButton extends Phaser.GameObjects.Container {
       this.back.on('pointerover', this.hover, this);
       this.back.on('pointerout', this.out, this);
     }
+    this.setSize(this.back.displayWIdth, this.back.displayHeight);
     this.scene.add.existing(this);
     this.setIcons();
   }

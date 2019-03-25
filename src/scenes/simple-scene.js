@@ -39,16 +39,7 @@ class SimpleScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('cokecan', 'assets/cokecan.png');
-    this.load.image('button1', 'assets/ui/buttons/2/1.png');
-    this.load.image('button2', 'assets/ui/buttons/2/5.png');
-    this.load.audio('cat', ['assets/audio/meow.mp3', 'assets/audio/meow.ogg']);
-    this.load.audio('backgroundMusic', ['assets/audio/background.mp3', 'assets/audio/background.ogg']);
-    this.load.image('toggleBack', 'assets/ui/toggles/1.png');
-    this.load.image('sfxOff', 'assets/ui/icons/sfx_off.png');
-    this.load.image('sfxOn', 'assets/ui/icons/sfx_on.png');
-    this.load.image('musicOn', 'assets/ui/icons/music_on.png');
-    this.load.image('musicOff', 'assets/ui/icons/music_off.png');
+
   }
 
   create() {

@@ -28,6 +28,10 @@ import {
   SoundButtons,
 } from '../classes/ui/soundButtons';
 
+import {
+  Bar,
+} from '../classes/components/bar';
+
 class SimpleScene extends Phaser.Scene {
 
   constructor() {
@@ -100,11 +104,18 @@ class SimpleScene extends Phaser.Scene {
       params: 'self_destruct',
     });
     this.sb = new SoundButtons(this, ScreenConfig.width());
+    this.bar = new Bar({
+      scene: this,
+      x: 240,
+      y: 330,
+    });
+    this.bar.setPercent(0.50)
 
     alignGrid.placeAtIndex(0, this.sb.musicToggle);
-    alignGrid.placeAtIndex(4, this.sb.sfxToggle);   
+    alignGrid.placeAtIndex(4, this.sb.sfxToggle);
     alignGrid.placeAtIndex(7, flatButton);
     alignGrid.placeAtIndex(12, flatButton2);
+    alignGrid.placeAtIndex(22, this.bar);
 
     this.emitter.on('button_pressed', this.buttonPressed, this);
   }

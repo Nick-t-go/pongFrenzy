@@ -38,10 +38,6 @@ class SimpleScene extends Phaser.Scene {
     super('SceneMain');
   }
 
-  preload() {
-
-  }
-
   create() {
     this.add.text(100, 100, 'Hello Phaser!', {
       fill: '#0f0',

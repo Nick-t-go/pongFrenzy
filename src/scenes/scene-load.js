@@ -23,13 +23,23 @@ class SceneLoad extends Phaser.Scene {
       fontSize: ScreenConfig.width() / 20,
     });
     this.progText.setOrigin(0.5, 0.5);
+
+
     this.load.on('progress', this.onProgress, this);
-    this.load.image('cokecan', 'assets/cokecan.png');
-    this.load.image('button1', 'assets/ui/buttons/2/1.png');
-    this.load.image('button2', 'assets/ui/buttons/2/5.png');
-    this.load.audio('cat', ['assets/audio/meow.mp3', 'assets/audio/meow.ogg']);
-    this.load.audio('backgroundMusic', ['assets/audio/background.mp3', 'assets/audio/background.ogg']);
-    this.load.image('toggleBack', 'assets/ui/toggles/1.png');
+    this.load.spritesheet('balls', 'assets/balls.png', {
+      frameWidth: 100,
+      frameHeight: 100,
+    });
+    this.load.spritesheet('paddles', 'assets/paddles.png', {
+      frameWidth: 400,
+      frameHeight: 50,
+    });
+    this.load.image('bar', 'assets/bar.jpg');
+
+    this.load.audio('lose', ['assets/audio/lose.wav', 'assets/audio/lose.ogg']);
+    this.load.audio('flip', ['assets/audio/flip.wav', 'assets/audio/flip.ogg']);
+    this.load.audio('hit', ['assets/audio/hit.wav', 'assets/audio/hit.ogg']);
+    this.load.image('toggleBack', 'assets/ui/toggles/3.png');
     this.load.image('sfxOff', 'assets/ui/icons/sfx_off.png');
     this.load.image('sfxOn', 'assets/ui/icons/sfx_on.png');
     this.load.image('musicOn', 'assets/ui/icons/music_on.png');

@@ -1,8 +1,13 @@
 class ScoreBox extends Phaser.GameObjects.Container {
-  constructor(config) {
-    super(config.scene);
-    this.scene = config.scene;
-    this.text1 = this.scene.add.text(0, 0, 'SCORE: 0');
+  constructor({
+    scene,
+    fontSize = 12,
+  }) {
+    super(scene);
+    this.scene = scene;
+    this.text1 = this.scene.add.text(0, 0, 'SCORE: 0', {
+      fontSize,
+    });
     this.add(this.text1);
     this.text1.setOrigin(0.5, 0.5);
 
@@ -11,7 +16,7 @@ class ScoreBox extends Phaser.GameObjects.Container {
   }
 
   scoreUpdated() {
-  	this.text1.setText(`Score: ${this.scene.model.score}`);
+    this.text1.setText(`Score: ${this.scene.model.score}`);
   }
 }
 

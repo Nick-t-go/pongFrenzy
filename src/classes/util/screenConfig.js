@@ -4,7 +4,7 @@ class ScreenConfig {
   }
 
   static height() {
-    const height = 680;
+    const height = 640;
     if (this.isMobile()) {
       return window.innerHeight;
     }
@@ -12,7 +12,7 @@ class ScreenConfig {
   }
 
   static width() {
-    const width = 600;
+    const width = 480;
     if (this.isMobile()) {
       return window.innerWidth;
     }

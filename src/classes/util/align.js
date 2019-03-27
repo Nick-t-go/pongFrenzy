@@ -4,6 +4,11 @@ class Align {
     obj.scaleY = obj.scaleX;
   }
 
+  static scaleToGameH(obj, per, height) {
+    obj.displayWidth = height * per;
+    obj.scaleX = obj.scaleY;
+  }
+
   static center(obj, width, height) {
     obj.x = width / 2;
     obj.y = height / 2;

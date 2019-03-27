@@ -37,8 +37,6 @@ class SceneTitle extends Phaser.Scene {
         width: ScreenConfig.width(),
       },
     );
-    //this.alignGrid.showNumbers();
-
     const title = this.add.image(0, 0, 'title');
     const btnStart = new FlatButton({
       scene: this,
@@ -53,11 +51,16 @@ class SceneTitle extends Phaser.Scene {
     this.alignGrid.placeAtIndex(38, title);
     this.alignGrid.placeAtIndex(93, btnStart);
 
+    this.ball = this.physics.add.sprite(0, 0, 'balls');
+    Align.scaleToGameW(this.ball, 0.05, ScreenConfig.width());
+    this.ball.body.setBounce(1, 1);
+    this.ball.body.setVelocity(150, 200);
+    this.ball.body.collideWorldBounds = true;
+
     this.emitter.on('start_game', this.startGame, this);
   }
 
   startGame() {
-  	console.log('hap')
     this.scene.start('SceneMain');
   }
   // update() {
